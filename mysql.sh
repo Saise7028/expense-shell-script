@@ -25,10 +25,10 @@ CHECK_ROOT(){
 VALIDATE(){
     if [ $1 -ne 0 ]
       then
-          echo "$2 is... $R Failed $N" | tee -a &$LOG_FILE
+          echo -e "$2 is... $R Failed $N" | tee -a &$LOG_FILE
           exit 1
       else
-          echo "$2 is...$G Success $N" | tee -a &$LOG_FILE
+          echo -e "$2 is...$G Success $N" | tee -a &$LOG_FILE
     fi      
 }
 
@@ -36,7 +36,7 @@ echo "script started executing at: $(date)"
 
 CHECK_ROOT
 
-dnf install mysql-server -y | tee -a &$LOG_FILE
+dnf install mysql-server -y &>>$LOG_FILE
 VALIDATE $? "installing mysql server"
 
 systemctl enable mysqld &>>$LOG_FILE
@@ -45,7 +45,7 @@ VALIDATE $? "enableing mysql server"
 systemctl start mysqld &>>$LOG_FILE
 VALIDATE $? "started mysql server"
 
-mysql -h awsd81s.online -u root -p ExpenseApp@1 -e 'show databases;' &>>$LOG_FILE
+mysql -h mysql.awsd81s.online -u root -p ExpenseApp@1 -e 'show databases;' &>>$LOG_FILE
 
 if [ $? -ne 0 ]
    then
@@ -53,5 +53,5 @@ if [ $? -ne 0 ]
        mysql_secure_installation --root-set-pass ExpenseApp@1
        VALIDATE $? "setting up root pasword"
     else
-        echo "mysql root password is already setup.. $Y Skipping $N" | tee -a &$LOG_FILE
+        echo -e "mysql root password is already setup.. $Y Skipping $N" | tee -a &$LOG_FILE
     fi   
