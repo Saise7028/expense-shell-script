@@ -56,34 +56,34 @@ id expense &>>$LOG_FILE
          echo -e "user is already exit, $Y SKIPPING $N"
     fi
 
-# mkdir -p /app
-# VALIDATE $? "create /app folder"
+mkdir -p /app
+VALIDATE $? "create /app folder"
 
-# curl -o /tmp/backend.zip https://expense-builds.s3.us-east-1.amazonaws.com/expense-backend-v2.zip &>>$LOG_FILE
-# VALIDATE $? "Downloading backend application"
+curl -o /tmp/backend.zip https://expense-builds.s3.us-east-1.amazonaws.com/expense-backend-v2.zip &>>$LOG_FILE
+VALIDATE $? "Downloading backend application"
 
-# cd /app
-# rm -rf /app/* # removeing eisting code
+cd /app
+rm -rf /app/* # removeing eisting code
 
-# unzip /tmp/backend.zip &>>$LOG_FILE
-# VALIDATE $? "Extracting the code"
+unzip /tmp/backend.zip &>>$LOG_FILE
+VALIDATE $? "Extracting the code"
 
-# npm installation &>>$LOG_FILE
-# cp /home/ec2-user/expense-shell-script/backend.service/etc/systemd/system/backend.service
+npm installation &>>$LOG_FILE
+cp /home/ec2-user/expense-shell-script/backend.service/etc/systemd/system/backend.service
 
-# # installing mysql server before connecting backend server
+# installing mysql server before connecting backend server
 
-# dnf install mysql -y &>>$LOG_FILE
-# VALIDATE $? "installing mysql"
+dnf install mysql -y &>>$LOG_FILE
+VALIDATE $? "installing mysql"
 
-# mysql -h mysql.awsd81s.online -uroot -pExpenseApp@1 < /app/schema/backend.sql &>>$LOG_FILE
-# VALIDATE $? "loading schema"
+mysql -h mysql.awsd81s.online -uroot -pExpenseApp@1 < /app/schema/backend.sql &>>$LOG_FILE
+VALIDATE $? "loading schema"
 
-# systemctl daemon-reload &>>$LOG_FILE
-# VALIDATE $? "daemon-reloading"
+systemctl daemon-reload &>>$LOG_FILE
+VALIDATE $? "daemon-reloading"
 
-# systemctl enable backend &>>$LOG_FILE
-# VALIDATE $? "enabling backend"
+systemctl enable backend &>>$LOG_FILE
+VALIDATE $? "enabling backend"
 
-# systemctl restart backend &>>$LOG_FILE
-# VALIDATE $? "restarted backend"
+systemctl restart backend &>>$LOG_FILE
+VALIDATE $? "restarted backend"
