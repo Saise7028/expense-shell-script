@@ -51,7 +51,7 @@ VALIDATE $? "Downloading frontend code"
 
 cd /usr/share/nginx/html
 unzip /tmp/frontend.zip &>>$LOG_FILE
-VALIDATE $? "extract trontend code"
+VALIDATE $? "extract frontend code"
 
 cp /home/ec2-user/expense-shell-script/expense.conf /etc/nginx/default.d/expense.cof 
 VALIDATE $? "copying expense conf"
