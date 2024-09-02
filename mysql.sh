@@ -45,7 +45,7 @@ VALIDATE $? "enableing mysql server"
 systemctl start mysqld &>>$LOG_FILE
 VALIDATE $? "started mysql server"
 
-mysql -h 172.31.42.235 -u root -p ExpenseApp@1 -e 'show databases;' &>>$LOG_FILE
+mysql -h mysql.awsd81s.online -u root -p ExpenseApp@1 -e 'show databases;' &>>$LOG_FILE
 
 if [ $? -ne 0 ]
    then
