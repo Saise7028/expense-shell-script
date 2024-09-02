@@ -38,10 +38,10 @@ dnf list modules nodejs -y &>>$LOG_FILE
 VALIDATE $? "list modules"
 
 dnf module disable nodejs:18 -y &>>$LOG_FILE
-VALIDATE $? "disable nodejs"
+VALIDATE $? "disable nodejs:18"
 
 dnf module enable nodejs:20 -y &>>$LOG_FILE
-VALIDATE $? "enable nodejs"
+VALIDATE $? "enable nodejs:20"
 
 dnf module install nodejs -y | tee -a $LOG_FILE
 VALIDATE $? "install nodejs"
