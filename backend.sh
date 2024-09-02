@@ -49,38 +49,38 @@ VALIDATE $? "install nodejs"
 id expense &>>$LOG_FILE
    if [ $? -ne 0 ]
      then
-         echo -e "user is not exisit, $G create user $N"
+         echo -e "expense user is not exists... $G create user $N"
          useradd expense &>>$LOG_FILE
-         VALIDATE $? "user creation"
+         VALIDATE $? "creating expense user"
      else
-         echo -e "user is already exit, $Y SKIPPING $N"
+         echo -e "expense user is already exists... $Y SKIPPING $N"
     fi
 
 mkdir -p /app
 VALIDATE $? "create /app folder"
 
 curl -o /tmp/backend.zip https://expense-builds.s3.us-east-1.amazonaws.com/expense-backend-v2.zip &>>$LOG_FILE
-VALIDATE $? "Downloading backend application"
+VALIDATE $? "Downloading backend application code"
 
 cd /app
-rm -rf /app/* # removeing eisting code
+rm -rf /app/* # removeing existing code
 
 unzip /tmp/backend.zip &>>$LOG_FILE
-VALIDATE $? "Extracting the code"
+VALIDATE $? "Extracting backend application code"
 
-npm installation &>>$LOG_FILE
+npm install &>>$LOG_FILE
 cp /home/ec2-user/expense-shell-script/backend.service /etc/systemd/system/backend.service
 
 # installing mysql server before connecting backend server
 
 dnf install mysql -y &>>$LOG_FILE
-VALIDATE $? "installing mysql"
+VALIDATE $? "installing mysql clint"
 
 mysql -h mysql.awsd81s.online -uroot -pExpenseApp@1 < /app/schema/backend.sql &>>$LOG_FILE
 VALIDATE $? "loading schema"
 
 systemctl daemon-reload &>>$LOG_FILE
-VALIDATE $? "daemon-reloading"
+VALIDATE $? "daemon-reload"
 
 systemctl enable backend &>>$LOG_FILE
 VALIDATE $? "enabled backend"
