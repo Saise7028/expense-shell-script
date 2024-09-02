@@ -47,14 +47,16 @@ dnf module install nodejs -y | tee -a $LOG_FILE
 VALIDATE $? "install nodejs"
 
 id expense &>>$LOG_FILE
-   if [ $? -ne 0 ]
-     then
-         echo -e "user is not exisit, $G create user $N"
-         useradd expense &>>$LOG_FILE
-         VALIDATE $? "user creation"
-    #  else
-    #      echo -e "user is already exit, $Y SKIPPING $N"
-    fi
+useradd expense &>>$LOG_FILE
+
+#    if [ $? -ne 0 ]
+#      then
+#          echo -e "user is not exisit, $G create user $N"
+#          useradd expense &>>$LOG_FILE
+#          VALIDATE $? "user creation"
+#      else
+#          echo -e "user is already exit, $Y SKIPPING $N"
+#     fi
 
 # mkdir -p /app
 # VALIDATE $? "create /app folder"
