@@ -53,7 +53,7 @@ id expense &>>$LOG_FILE
          useradd expense &>>$LOG_FILE
          VALIDATE $? "user creation"
      else
-         echo -e"user is already exit, $Y SKIPPING $N"
+         echo -e "user is already exit, $Y SKIPPING $N"
     fi
 
 # mkdir -p /app
