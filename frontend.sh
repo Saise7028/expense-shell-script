@@ -38,20 +38,20 @@ dnf install nginx -y &>>$LOG_FILE
 VALIDATE $? "intalling nginx"
 
 systemctl enable nginx &>>$LOG_FILE
-VALIDATE $? "enabled nginx"
+VALIDATE $? "enable nginx"
 
 systemctl start nginx &>>$LOG_FILE
-VALIDATE $? "started nginx"
+VALIDATE $? "start nginx"
 
 rm -rf /usr/share/nginx/html/* &>>$LOG_FILE
 VALIDATE $? "removeing default website"
 
 curl -o /tmp/frontend.zip https://expense-builds.s3.us-east-1.amazonaws.com/expense-frontend-v2.zip &>>$LOG_FILE
-VALIDATE $? "Downloading code"
+VALIDATE $? "Downloading frontend code"
 
-cd /usr/share/nginx/html/
+cd /usr/share/nginx/html
 unzip /tmp/frontend.zip &>>$LOG_FILE
-VALIDATE $? "extract the code"
+VALIDATE $? "extract trontend code"
 
 cp /home/ec2-user/expense-shell-script/expense.conf /etc/nginx/default.d/expense.cof 
 VALIDATE $? "copying expense conf"
