@@ -34,7 +34,7 @@ echo "started script executing date: $(date)" | tee -a $LOG_FILE
 
 CHECK_ROOT
 
-dnf modules list nodejs -y &>>$LOG_FILE
+dnf list modules nodejs -y &>>$LOG_FILE
 VALIDATE $? "list modules"
 
 dnf disable module nodejs:18 -y &>>$LOG_FILE
