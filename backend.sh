@@ -43,7 +43,7 @@ VALIDATE $? "disable nodejs"
 dnf module enable nodejs:20 -y &>>$LOG_FILE
 VALIDATE $? "enable nodejs"
 
-dnf module install nodejs -y &$>>$LOG_FILE
+dnf module install nodejs -y | tee -a $LOG_FILE
 VALIDATE $? "install nodejs"
 
 id expense &>>$LOG_FILE
