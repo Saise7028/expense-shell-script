@@ -37,10 +37,10 @@ CHECK_ROOT
 dnf list modules nodejs -y &>>$LOG_FILE
 VALIDATE $? "list modules"
 
-dnf disable module nodejs:18 -y &>>$LOG_FILE
+dnf disable module nodejs: 18 -y &>>$LOG_FILE
 VALIDATE $? "disable nodejs"
 
-dnf enable nodejs:20 -y &>>$LOG_FILE
+dnf enable nodejs: 20 -y &>>$LOG_FILE
 VALIDATE $? "enable nodejs"
 
 dnf module install nodejs -y &$>>$LOG_FILE
