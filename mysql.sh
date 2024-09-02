@@ -28,11 +28,11 @@ VALIDATE(){
           echo -e "$2 is... $R Failed $N" | tee -a &$LOG_FILE
           exit 1
       else
-          echo -e "$2 is...$G Success $N" | tee -a &$LOG_FILE
+          echo -e "$2 is...$G Success $N" | tee -a $LOG_FILE
     fi      
 }
 
-echo "script started executing at: $(date)" | tee -a &$LOG_FILE
+echo "script started executing at: $(date)" | tee -a $LOG_FILE
 
 CHECK_ROOT
 
@@ -53,5 +53,5 @@ if [ $? -ne 0 ]
        mysql_secure_installation --root-set-pass ExpenseApp@1
        VALIDATE $? "setting up root pasword"
     else
-        echo -e "mysql root password is already setup.. $Y Skipping $N" | tee -a &$LOG_FILE
+        echo -e "mysql root password is already setup.. $Y Skipping $N" | tee -a $LOG_FILE
     fi   
