@@ -32,21 +32,21 @@ VALIDATE(){
 
 echo "started script executing date: $(date)" | tee -a $LOG_FILE 
 
-# CHECK_ROOT
+CHECK_ROOT
 
-# dnf modules list nodejs -y &>>$LOG_FILE
-# VALIDATE $? "list modules"
+dnf modules list nodejs -y &>>$LOG_FILE
+VALIDATE $? "list modules"
 
-# dnf disable module nodejs:18 -y &>>$LOG_FILE
-# VALIDATE $? "disable nodejs"
+dnf disable module nodejs:18 -y &>>$LOG_FILE
+VALIDATE $? "disable nodejs"
 
-# dnf enable nodejs:20 -y &>>$LOG_FILE
-# VALIDATE $? "enable nodejs"
+dnf enable nodejs:20 -y &>>$LOG_FILE
+VALIDATE $? "enable nodejs"
 
-# dnf module install nodejs -y &$>>$LOG_FILE
-# VALIDATE $? "install nodejs"
+dnf module install nodejs -y &$>>$LOG_FILE
+VALIDATE $? "install nodejs"
 
-# id expense &>>$LOG_FILE
+id expense &>>$LOG_FILE
 #    if [ $? -ne 0 ]
 #      then
 #          echo "user is not exisit, $G create user $N"
