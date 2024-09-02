@@ -49,11 +49,11 @@ VALIDATE $? "install nodejs"
 id expense &>>$LOG_FILE
    if [ $? -ne 0 ]
      then
-         echo "user is not exisit, $G create user $N"
+         echo -e "user is not exisit, $G create user $N"
          useradd expense &>>$LOG_FILE
          VALIDATE $? "user creation"
      else
-         echo "user is already exit, $Y SKIPPING $N"
+         echo -e "user is already exit, $Y SKIPPING $N"
     fi
 
 # mkdir -p /app
